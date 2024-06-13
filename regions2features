@@ -1,0 +1,31 @@
+import pickle    
+from userDefinedTools import *
+with open('./regions.bin_pisa', 'rb') as  f: 
+    regions = pickle.load(f) 
+
+with open('../滑脱/labels.bin','rb') as f:
+    labels = pickle.load(f)
+
+#获得不同脊柱块的数据，放到不同的表格中
+for j in (1,2,3,4,5):
+    pic_data = pd.DataFrame()
+    df = getLabel(j, labels)    #j代表第j个信息块，第1个信息块对应L2的标签，以此类推
+    for i in range(len(df)):
+        #获得第j个信息块的信息
+        a=get_multiInfo(str(df.iloc[i,0]), j, regions)
+        if(type(a) != int):
+            pic_data = pd.concat([pic_data,a],axis=0)
+    idx = list(pic_data.columns).index('编号')
+    for i in range(len(pic_data)):
+        pic_data.iloc[i,idx] = int(pic_data.iloc[i,idx])
+    train_df = pd.merge(df, pic_data, on = '编号', how = 'right')
+    train_df.to_csv('Test2'+str(j)+'.csv',index=False)
+    
+#合并获得一个完整的Test_data
+alldf = pd.read_csv('Test21.csv')
+alldf['编号'] = alldf['编号'].apply(lambda x: str(x)+'_1')
+for i in (2,3,4,5):
+    tmp_df = pd.read_csv('Test2' + str(i) + '.csv')
+    tmp_df['编号'] = tmp_df['编号'].apply(lambda x: str(x)+'_'+str(i))
+    alldf = alldf.append(tmp_df)
+alldf.to_csv('all_Data_newest_more_features_pisa.csv',index=0)
