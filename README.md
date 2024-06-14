@@ -9,3 +9,6 @@ The outcomes of our instance segmentation process, executed using the Mask R-CNN
 
 ## LGBM Model
 The LightGBM model was constructed utilizing the PyCaret library, with the primary creation process documented in the 'lgbmModel4dignosis.ipynb' notebook. The input to this model is derived from the 'regions2features' process, which extracts a 28-dimensional feature set from the CSV file mentioned earlier. We allocated 65% of the vertebral data for training the model and reserved 35% for testing, enabling us to train the model effectively and tune its parameters. Ultimately, we have decided to make both the experimental environment and the results transparent and accessible to the public
+
+
+The compare method is reference19, can see in judgeByRulesCite19.py.
