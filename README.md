@@ -10,5 +10,15 @@ The outcomes of our instance segmentation process, executed using the Mask R-CNN
 ## LGBM Model
 The LightGBM model was constructed utilizing the PyCaret library, with the primary creation process documented in the 'lgbmModel4dignosis.ipynb' notebook. The input to this model is derived from the 'regions2features' process, which extracts a 28-dimensional feature set from the CSV file mentioned earlier. We allocated 65% of the vertebral data for training the model and reserved 35% for testing, enabling us to train the model effectively and tune its parameters. Ultimately, we have decided to make both the experimental environment and the results transparent and accessible to the public
 
+colmuns name stands for:
 
-The compare method is reference19, can see in judgeByRulesCite19.py.
+| Colmun Name  | Stands for |
+| ------------- | ------------- |
+| 编号  | example:366984_1, 366984 means a patient, 1 means the L1 lumbar|
+| 图片序号2,3,4  | means neutral, lordotic, and kyphotic view of X-ray  |
+| lineX, slopeX,ratioX  | Reference paper Fig4 Extracted low-order geometric features |
+| PSD  | Reference paper reference[1] Extracted an angle feature |
+
+The compare method is reference[1], can see in judgeByRulesCite19.py.
+
+[1]Trinh G M, Shao H C, Hsieh K L C, et al. Detection of lumbar spondylolisthesis from X-ray images using deep learning network[J]. Journal of Clinical Medicine, 2022, 11(18): 5450.
